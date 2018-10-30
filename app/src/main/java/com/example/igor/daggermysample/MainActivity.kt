@@ -8,7 +8,9 @@ import com.example.igor.daggermysample.pay_car.DaggerPayCarComponent
 import kotlinx.android.synthetic.main.activity_main.*
 import com.example.igor.daggermysample.Example_1_Dagger2.Soldiers
 import com.example.igor.daggermysample.Example_1_Dagger2.Cash
-
+import com.example.igor.daggermysample.subcomponents.ChatDataModule
+import com.example.igor.daggermysample.subcomponents.ChatModule
+import com.example.igor.daggermysample.subcomponents.DaggerAppComponent
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +36,15 @@ class MainActivity : AppCompatActivity() {
         val componentPayCar = DaggerPayCarComponent.create()
         val payCar = componentPayCar.payCar.payCar()
 
-        val hello = "$payCar\n$report"
-        tv.text = hello
+        val appComponent = DaggerAppComponent.create()
+        val chatComponent = appComponent
+            .chatComponentBuilder()
+            .build()
+
+
+        val anyComponent = chatComponent.anyComponentBuilder().build()
+
+
+
     }
 }
